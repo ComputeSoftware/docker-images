@@ -1,160 +1,6 @@
 version: '2.1'
 jobs:
-  publish-adoptopenjdk-8-alpine:
-    docker:
-    - {image: 'docker:17.05.0-ce-git'}
-    steps:
-    - checkout
-    - run:
-        name: Build & pushadoptopenjdk-8-alpine
-        command: |-
-          docker build -t computesoftware/adoptopenjdk-8-alpine:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-8-alpine.Dockerfile
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-8-alpine:$CIRCLE_SHA1
-  publish-adoptopenjdk-11-tools-deps-1.10.1.466:
-    docker:
-    - {image: 'docker:17.05.0-ce-git'}
-    steps:
-    - checkout
-    - run:
-        name: Build & pushadoptopenjdk-11-tools-deps-1.10.1.466
-        command: |-
-          docker build -t computesoftware/adoptopenjdk-11-tools-deps-1.10.1.466:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-11-tools-deps-1.10.1.466.Dockerfile
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-11-tools-deps-1.10.1.466:$CIRCLE_SHA1
-  publish-adoptopenjdk-11-alpine-tools-deps-1.10.1.466:
-    docker:
-    - {image: 'docker:17.05.0-ce-git'}
-    steps:
-    - checkout
-    - run:
-        name: Build & pushadoptopenjdk-11-alpine-tools-deps-1.10.1.466
-        command: |-
-          docker build -t computesoftware/adoptopenjdk-11-alpine-tools-deps-1.10.1.466:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-11-alpine-tools-deps-1.10.1.466.Dockerfile
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-11-alpine-tools-deps-1.10.1.466:$CIRCLE_SHA1
-  publish-adoptopenjdk-8-alpine-tools-deps-1.10.1.466:
-    docker:
-    - {image: 'docker:17.05.0-ce-git'}
-    steps:
-    - checkout
-    - run:
-        name: Build & pushadoptopenjdk-8-alpine-tools-deps-1.10.1.466
-        command: |-
-          docker build -t computesoftware/adoptopenjdk-8-alpine-tools-deps-1.10.1.466:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-8-alpine-tools-deps-1.10.1.466.Dockerfile
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-8-alpine-tools-deps-1.10.1.466:$CIRCLE_SHA1
-  publish-adoptopenjdk-11-alpine-intel-mkl-2018.4-057:
-    docker:
-    - {image: 'docker:17.05.0-ce-git'}
-    steps:
-    - checkout
-    - run:
-        name: Build & pushadoptopenjdk-11-alpine-intel-mkl-2018.4-057
-        command: |-
-          docker build -t computesoftware/adoptopenjdk-11-alpine-intel-mkl-2018.4-057:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-11-alpine-intel-mkl-2018.4-057.Dockerfile
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-11-alpine-intel-mkl-2018.4-057:$CIRCLE_SHA1
-  publish-adoptopenjdk-8:
-    docker:
-    - {image: 'docker:17.05.0-ce-git'}
-    steps:
-    - checkout
-    - run:
-        name: Build & pushadoptopenjdk-8
-        command: |-
-          docker build -t computesoftware/adoptopenjdk-8:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-8.Dockerfile
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-8:$CIRCLE_SHA1
-  publish-adoptopenjdk-11-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466:
-    docker:
-    - {image: 'docker:17.05.0-ce-git'}
-    steps:
-    - checkout
-    - run:
-        name: Build & pushadoptopenjdk-11-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466
-        command: |-
-          docker build -t computesoftware/adoptopenjdk-11-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-11-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466.Dockerfile
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-11-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466:$CIRCLE_SHA1
-  publish-adoptopenjdk-8-alpine-intel-mkl-2018.4-057:
-    docker:
-    - {image: 'docker:17.05.0-ce-git'}
-    steps:
-    - checkout
-    - run:
-        name: Build & pushadoptopenjdk-8-alpine-intel-mkl-2018.4-057
-        command: |-
-          docker build -t computesoftware/adoptopenjdk-8-alpine-intel-mkl-2018.4-057:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-8-alpine-intel-mkl-2018.4-057.Dockerfile
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-8-alpine-intel-mkl-2018.4-057:$CIRCLE_SHA1
-  publish-adoptopenjdk-11-intel-mkl-2018.4-057:
-    docker:
-    - {image: 'docker:17.05.0-ce-git'}
-    steps:
-    - checkout
-    - run:
-        name: Build & pushadoptopenjdk-11-intel-mkl-2018.4-057
-        command: |-
-          docker build -t computesoftware/adoptopenjdk-11-intel-mkl-2018.4-057:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-11-intel-mkl-2018.4-057.Dockerfile
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-11-intel-mkl-2018.4-057:$CIRCLE_SHA1
-  publish-adoptopenjdk-11:
-    docker:
-    - {image: 'docker:17.05.0-ce-git'}
-    steps:
-    - checkout
-    - run:
-        name: Build & pushadoptopenjdk-11
-        command: |-
-          docker build -t computesoftware/adoptopenjdk-11:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-11.Dockerfile
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-11:$CIRCLE_SHA1
-  publish-adoptopenjdk-8-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466:
-    docker:
-    - {image: 'docker:17.05.0-ce-git'}
-    steps:
-    - checkout
-    - run:
-        name: Build & pushadoptopenjdk-8-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466
-        command: |-
-          docker build -t computesoftware/adoptopenjdk-8-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-8-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466.Dockerfile
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-8-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466:$CIRCLE_SHA1
-  publish-adoptopenjdk-8-intel-mkl-2018.4-057:
-    docker:
-    - {image: 'docker:17.05.0-ce-git'}
-    steps:
-    - checkout
-    - run:
-        name: Build & pushadoptopenjdk-8-intel-mkl-2018.4-057
-        command: |-
-          docker build -t computesoftware/adoptopenjdk-8-intel-mkl-2018.4-057:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-8-intel-mkl-2018.4-057.Dockerfile
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-8-intel-mkl-2018.4-057:$CIRCLE_SHA1
-  publish-adoptopenjdk-11-alpine:
-    docker:
-    - {image: 'docker:17.05.0-ce-git'}
-    steps:
-    - checkout
-    - run:
-        name: Build & pushadoptopenjdk-11-alpine
-        command: |-
-          docker build -t computesoftware/adoptopenjdk-11-alpine:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-11-alpine.Dockerfile
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-11-alpine:$CIRCLE_SHA1
-  publish-adoptopenjdk-11-intel-mkl-2018.4-057-tools-deps-1.10.1.466:
-    docker:
-    - {image: 'docker:17.05.0-ce-git'}
-    steps:
-    - checkout
-    - run:
-        name: Build & pushadoptopenjdk-11-intel-mkl-2018.4-057-tools-deps-1.10.1.466
-        command: |-
-          docker build -t computesoftware/adoptopenjdk-11-intel-mkl-2018.4-057-tools-deps-1.10.1.466:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-11-intel-mkl-2018.4-057-tools-deps-1.10.1.466.Dockerfile
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-11-intel-mkl-2018.4-057-tools-deps-1.10.1.466:$CIRCLE_SHA1
-  publish-adoptopenjdk-8-intel-mkl-2018.4-057-tools-deps-1.10.1.466:
+  d:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
@@ -162,10 +8,179 @@ jobs:
     - run:
         name: Build & pushadoptopenjdk-8-intel-mkl-2018.4-057-tools-deps-1.10.1.466
         command: |-
+          echo adoptopenjdk-8-intel-mkl-2018.4-057-tools-deps-1.10.1.466
           docker build -t computesoftware/adoptopenjdk-8-intel-mkl-2018.4-057-tools-deps-1.10.1.466:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-8-intel-mkl-2018.4-057-tools-deps-1.10.1.466.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push computesoftware/adoptopenjdk-8-intel-mkl-2018.4-057-tools-deps-1.10.1.466:$CIRCLE_SHA1
-  publish-adoptopenjdk-8-tools-deps-1.10.1.466:
+  n:
+    docker:
+    - {image: 'docker:17.05.0-ce-git'}
+    steps:
+    - checkout
+    - run:
+        name: Build & pushadoptopenjdk-11-alpine-intel-mkl-2018.4-057
+        command: |-
+          echo adoptopenjdk-11-alpine-intel-mkl-2018.4-057
+          docker build -t computesoftware/adoptopenjdk-11-alpine-intel-mkl-2018.4-057:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-11-alpine-intel-mkl-2018.4-057.Dockerfile
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push computesoftware/adoptopenjdk-11-alpine-intel-mkl-2018.4-057:$CIRCLE_SHA1
+  f:
+    docker:
+    - {image: 'docker:17.05.0-ce-git'}
+    steps:
+    - checkout
+    - run:
+        name: Build & pushadoptopenjdk-8-alpine-intel-mkl-2018.4-057
+        command: |-
+          echo adoptopenjdk-8-alpine-intel-mkl-2018.4-057
+          docker build -t computesoftware/adoptopenjdk-8-alpine-intel-mkl-2018.4-057:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-8-alpine-intel-mkl-2018.4-057.Dockerfile
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push computesoftware/adoptopenjdk-8-alpine-intel-mkl-2018.4-057:$CIRCLE_SHA1
+  e:
+    docker:
+    - {image: 'docker:17.05.0-ce-git'}
+    steps:
+    - checkout
+    - run:
+        name: Build & pushadoptopenjdk-8-alpine
+        command: |-
+          echo adoptopenjdk-8-alpine
+          docker build -t computesoftware/adoptopenjdk-8-alpine:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-8-alpine.Dockerfile
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push computesoftware/adoptopenjdk-8-alpine:$CIRCLE_SHA1
+  p:
+    docker:
+    - {image: 'docker:17.05.0-ce-git'}
+    steps:
+    - checkout
+    - run:
+        name: Build & pushadoptopenjdk-11-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466
+        command: |-
+          echo adoptopenjdk-11-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466
+          docker build -t computesoftware/adoptopenjdk-11-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-11-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466.Dockerfile
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push computesoftware/adoptopenjdk-11-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466:$CIRCLE_SHA1
+  j:
+    docker:
+    - {image: 'docker:17.05.0-ce-git'}
+    steps:
+    - checkout
+    - run:
+        name: Build & pushadoptopenjdk-11-intel-mkl-2018.4-057
+        command: |-
+          echo adoptopenjdk-11-intel-mkl-2018.4-057
+          docker build -t computesoftware/adoptopenjdk-11-intel-mkl-2018.4-057:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-11-intel-mkl-2018.4-057.Dockerfile
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push computesoftware/adoptopenjdk-11-intel-mkl-2018.4-057:$CIRCLE_SHA1
+  a:
+    docker:
+    - {image: 'docker:17.05.0-ce-git'}
+    steps:
+    - checkout
+    - run:
+        name: Build & pushadoptopenjdk-8
+        command: |-
+          echo adoptopenjdk-8
+          docker build -t computesoftware/adoptopenjdk-8:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-8.Dockerfile
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push computesoftware/adoptopenjdk-8:$CIRCLE_SHA1
+  i:
+    docker:
+    - {image: 'docker:17.05.0-ce-git'}
+    steps:
+    - checkout
+    - run:
+        name: Build & pushadoptopenjdk-11
+        command: |-
+          echo adoptopenjdk-11
+          docker build -t computesoftware/adoptopenjdk-11:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-11.Dockerfile
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push computesoftware/adoptopenjdk-11:$CIRCLE_SHA1
+  k:
+    docker:
+    - {image: 'docker:17.05.0-ce-git'}
+    steps:
+    - checkout
+    - run:
+        name: Build & pushadoptopenjdk-11-tools-deps-1.10.1.466
+        command: |-
+          echo adoptopenjdk-11-tools-deps-1.10.1.466
+          docker build -t computesoftware/adoptopenjdk-11-tools-deps-1.10.1.466:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-11-tools-deps-1.10.1.466.Dockerfile
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push computesoftware/adoptopenjdk-11-tools-deps-1.10.1.466:$CIRCLE_SHA1
+  b:
+    docker:
+    - {image: 'docker:17.05.0-ce-git'}
+    steps:
+    - checkout
+    - run:
+        name: Build & pushadoptopenjdk-8-intel-mkl-2018.4-057
+        command: |-
+          echo adoptopenjdk-8-intel-mkl-2018.4-057
+          docker build -t computesoftware/adoptopenjdk-8-intel-mkl-2018.4-057:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-8-intel-mkl-2018.4-057.Dockerfile
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push computesoftware/adoptopenjdk-8-intel-mkl-2018.4-057:$CIRCLE_SHA1
+  g:
+    docker:
+    - {image: 'docker:17.05.0-ce-git'}
+    steps:
+    - checkout
+    - run:
+        name: Build & pushadoptopenjdk-8-alpine-tools-deps-1.10.1.466
+        command: |-
+          echo adoptopenjdk-8-alpine-tools-deps-1.10.1.466
+          docker build -t computesoftware/adoptopenjdk-8-alpine-tools-deps-1.10.1.466:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-8-alpine-tools-deps-1.10.1.466.Dockerfile
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push computesoftware/adoptopenjdk-8-alpine-tools-deps-1.10.1.466:$CIRCLE_SHA1
+  l:
+    docker:
+    - {image: 'docker:17.05.0-ce-git'}
+    steps:
+    - checkout
+    - run:
+        name: Build & pushadoptopenjdk-11-intel-mkl-2018.4-057-tools-deps-1.10.1.466
+        command: |-
+          echo adoptopenjdk-11-intel-mkl-2018.4-057-tools-deps-1.10.1.466
+          docker build -t computesoftware/adoptopenjdk-11-intel-mkl-2018.4-057-tools-deps-1.10.1.466:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-11-intel-mkl-2018.4-057-tools-deps-1.10.1.466.Dockerfile
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push computesoftware/adoptopenjdk-11-intel-mkl-2018.4-057-tools-deps-1.10.1.466:$CIRCLE_SHA1
+  h:
+    docker:
+    - {image: 'docker:17.05.0-ce-git'}
+    steps:
+    - checkout
+    - run:
+        name: Build & pushadoptopenjdk-8-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466
+        command: |-
+          echo adoptopenjdk-8-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466
+          docker build -t computesoftware/adoptopenjdk-8-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-8-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466.Dockerfile
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push computesoftware/adoptopenjdk-8-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466:$CIRCLE_SHA1
+  m:
+    docker:
+    - {image: 'docker:17.05.0-ce-git'}
+    steps:
+    - checkout
+    - run:
+        name: Build & pushadoptopenjdk-11-alpine
+        command: |-
+          echo adoptopenjdk-11-alpine
+          docker build -t computesoftware/adoptopenjdk-11-alpine:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-11-alpine.Dockerfile
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push computesoftware/adoptopenjdk-11-alpine:$CIRCLE_SHA1
+  o:
+    docker:
+    - {image: 'docker:17.05.0-ce-git'}
+    steps:
+    - checkout
+    - run:
+        name: Build & pushadoptopenjdk-11-alpine-tools-deps-1.10.1.466
+        command: |-
+          echo adoptopenjdk-11-alpine-tools-deps-1.10.1.466
+          docker build -t computesoftware/adoptopenjdk-11-alpine-tools-deps-1.10.1.466:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-11-alpine-tools-deps-1.10.1.466.Dockerfile
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push computesoftware/adoptopenjdk-11-alpine-tools-deps-1.10.1.466:$CIRCLE_SHA1
+  c:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
@@ -173,6 +188,7 @@ jobs:
     - run:
         name: Build & pushadoptopenjdk-8-tools-deps-1.10.1.466
         command: |-
+          echo adoptopenjdk-8-tools-deps-1.10.1.466
           docker build -t computesoftware/adoptopenjdk-8-tools-deps-1.10.1.466:$CIRCLE_SHA1 . --file dockerfiles/adoptopenjdk-8-tools-deps-1.10.1.466.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push computesoftware/adoptopenjdk-8-tools-deps-1.10.1.466:$CIRCLE_SHA1
@@ -180,19 +196,19 @@ workflows:
   version: '2'
   ci-workflow:
     jobs:
-    - publish-adoptopenjdk-8: {context: docker-env}
-    - publish-adoptopenjdk-8-intel-mkl-2018.4-057: {context: docker-env}
-    - publish-adoptopenjdk-8-tools-deps-1.10.1.466: {context: docker-env}
-    - publish-adoptopenjdk-8-intel-mkl-2018.4-057-tools-deps-1.10.1.466: {context: docker-env}
-    - publish-adoptopenjdk-8-alpine: {context: docker-env}
-    - publish-adoptopenjdk-8-alpine-intel-mkl-2018.4-057: {context: docker-env}
-    - publish-adoptopenjdk-8-alpine-tools-deps-1.10.1.466: {context: docker-env}
-    - publish-adoptopenjdk-8-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466: {context: docker-env}
-    - publish-adoptopenjdk-11: {context: docker-env}
-    - publish-adoptopenjdk-11-intel-mkl-2018.4-057: {context: docker-env}
-    - publish-adoptopenjdk-11-tools-deps-1.10.1.466: {context: docker-env}
-    - publish-adoptopenjdk-11-intel-mkl-2018.4-057-tools-deps-1.10.1.466: {context: docker-env}
-    - publish-adoptopenjdk-11-alpine: {context: docker-env}
-    - publish-adoptopenjdk-11-alpine-intel-mkl-2018.4-057: {context: docker-env}
-    - publish-adoptopenjdk-11-alpine-tools-deps-1.10.1.466: {context: docker-env}
-    - publish-adoptopenjdk-11-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466: {context: docker-env}
+    - a: {context: docker-env}
+    - b: {context: docker-env}
+    - c: {context: docker-env}
+    - d: {context: docker-env}
+    - e: {context: docker-env}
+    - f: {context: docker-env}
+    - g: {context: docker-env}
+    - h: {context: docker-env}
+    - i: {context: docker-env}
+    - j: {context: docker-env}
+    - k: {context: docker-env}
+    - l: {context: docker-env}
+    - m: {context: docker-env}
+    - n: {context: docker-env}
+    - o: {context: docker-env}
+    - p: {context: docker-env}

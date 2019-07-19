@@ -64,29 +64,39 @@
             :file       (io/file "dockerfiles" (str image-name ".Dockerfile"))}))
        image-variations))
 
+(def alphabet
+  (map (comp str char) (range 97 123)))
+
+(def alphabet-infinite
+  (map-indexed (fn [idx letter]
+                 (str/join (take (inc (int (/ idx 26))) (cycle [letter])))) (cycle alphabet)))
+
 (defn get-circleci-config-map
   [dockerfiles]
-  {:version   "2.1"
+  (let [dockerfiles (map (fn [idx m]
+                           (assoc m :job-name idx)) alphabet-infinite dockerfiles)]
+    {:version   "2.1"
 
-   :jobs      (reduce (fn [jobs-map {:keys [image-name file]}]
-                        (assoc jobs-map
-                          (str "publish-" image-name)
-                          {:docker [{:image "docker:17.05.0-ce-git"}]
-                           :steps  [:checkout
-                                    {:run {:name    (str "Build & push" image-name)
-                                           :command (str/join "\n"
-                                                              [(format "docker build -t computesoftware/%s:$CIRCLE_SHA1 . --file %s"
-                                                                       image-name
-                                                                       (.getPath file))
-                                                               "docker login -u $DOCKER_USER -p $DOCKER_PASS"
-                                                               (format "docker push computesoftware/%s:$CIRCLE_SHA1"
-                                                                       image-name)])}}]}))
-                      {} dockerfiles)
+     :jobs      (reduce (fn [jobs-map {:keys [job-name image-name file]}]
+                          (assoc jobs-map
+                            job-name
+                            {:docker [{:image "docker:17.05.0-ce-git"}]
+                             :steps  [:checkout
+                                      {:run {:name    (str "Build & push" image-name)
+                                             :command (str/join "\n"
+                                                                [(format "echo %s" image-name)
+                                                                 (format "docker build -t computesoftware/%s:$CIRCLE_SHA1 . --file %s"
+                                                                         image-name
+                                                                         (.getPath file))
+                                                                 "docker login -u $DOCKER_USER -p $DOCKER_PASS"
+                                                                 (format "docker push computesoftware/%s:$CIRCLE_SHA1"
+                                                                         image-name)])}}]}))
+                        {} dockerfiles)
 
-   :workflows {:version     "2"
-               :ci-workflow {:jobs (map (fn [{:keys [image-name]}]
-                                          {(str "publish-" image-name) {:context "docker-env"}})
-                                        dockerfiles)}}})
+     :workflows {:version     "2"
+                 :ci-workflow {:jobs (map (fn [{:keys [job-name]}]
+                                            {job-name {:context "docker-env"}})
+                                          dockerfiles)}}}))
 
 (defn write-ci-and-dockerfiles
   [{:keys [bases variants]}]
