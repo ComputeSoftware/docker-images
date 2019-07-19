@@ -1,5 +1,7 @@
 FROM adoptopenjdk/openjdk8:jdk8u212-b04-alpine
 
+RUN apt-get install -y wget gnupg
+
 USER root
 
 # Intel install guide: https://software.intel.com/en-us/articles/installing-intel-free-libs-and-python-apt-repo
