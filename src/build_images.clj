@@ -6,15 +6,22 @@
     [cljstache.core :as mustache]
     [clj-yaml.core :as yaml]))
 
+(def debian-path "base-templates/debian.txt")
+(def alpine-path "base-templates/alpine.txt")
+
 (def all-images
-  {:bases    [{:name  "adoptopenjdk-8"
-               :image "adoptopenjdk/openjdk8:jdk8u212-b04"}
-              {:name  "adoptopenjdk-8-alpine"
-               :image "adoptopenjdk/openjdk8:jdk8u212-b04-alpine"}
-              {:name  "adoptopenjdk-11"
-               :image "adoptopenjdk/openjdk11:jdk-11.0.3_7"}
-              {:name  "adoptopenjdk-11-alpine"
-               :image "adoptopenjdk/openjdk11:jdk-11.0.3_7-alpine"}]
+  {:bases    [{:name          "adoptopenjdk-8"
+               :image         "adoptopenjdk/openjdk8:jdk8u212-b04"
+               :template-path debian-path}
+              {:name          "adoptopenjdk-8-alpine"
+               :image         "adoptopenjdk/openjdk8:jdk8u212-b04-alpine"
+               :template-path alpine-path}
+              {:name          "adoptopenjdk-11"
+               :image         "adoptopenjdk/openjdk11:jdk-11.0.3_7"
+               :template-path debian-path}
+              {:name          "adoptopenjdk-11-alpine"
+               :image         "adoptopenjdk/openjdk11:jdk-11.0.3_7-alpine"
+               :template-path alpine-path}]
    :variants (sorted-map
                "tools-deps" {:template-path "variant-scripts/tools-deps.txt"
                              :versions      ["1.10.1.466"]}
@@ -43,8 +50,6 @@
   [path template-vars]
   (mustache/render (slurp path) template-vars))
 
-(def base-template-path "dockerfile-base-template.txt")
-
 (defn dockerfiles-content
   [image-variations]
   (map (fn [{:keys [base variants]}]
@@ -58,7 +63,7 @@
                                                      (sort-by :variant/name variants))))))]
            {:image-name image-name
             :content    (str/join "\n\n"
-                                  (concat [(render-file base-template-path {:from (:image base)})]
+                                  (concat [(render-file (:template-path base) {:from (:image base)})]
                                           (map (fn [{:variant/keys [version template-path]}]
                                                  (render-file template-path {:version version})) variants)))
             :file       (io/file "dockerfiles" (str image-name ".Dockerfile"))}))
