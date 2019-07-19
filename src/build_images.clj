@@ -82,6 +82,7 @@
                             job-name
                             {:docker [{:image "docker:17.05.0-ce-git"}]
                              :steps  [:checkout
+                                      :setup_remote_docker
                                       {:run {:name    (str "Build & push" image-name)
                                              :command (str/join "\n"
                                                                 [(format "echo %s" image-name)

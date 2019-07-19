@@ -5,6 +5,7 @@ jobs:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
+    - setup_remote_docker
     - run:
         name: Build & pushadoptopenjdk-8-intel-mkl-2018.4-057-tools-deps-1.10.1.466
         command: |-
@@ -17,6 +18,7 @@ jobs:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
+    - setup_remote_docker
     - run:
         name: Build & pushadoptopenjdk-11-alpine-intel-mkl-2018.4-057
         command: |-
@@ -29,6 +31,7 @@ jobs:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
+    - setup_remote_docker
     - run:
         name: Build & pushadoptopenjdk-8-alpine-intel-mkl-2018.4-057
         command: |-
@@ -41,6 +44,7 @@ jobs:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
+    - setup_remote_docker
     - run:
         name: Build & pushadoptopenjdk-8-alpine
         command: |-
@@ -53,6 +57,7 @@ jobs:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
+    - setup_remote_docker
     - run:
         name: Build & pushadoptopenjdk-11-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466
         command: |-
@@ -65,6 +70,7 @@ jobs:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
+    - setup_remote_docker
     - run:
         name: Build & pushadoptopenjdk-11-intel-mkl-2018.4-057
         command: |-
@@ -77,6 +83,7 @@ jobs:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
+    - setup_remote_docker
     - run:
         name: Build & pushadoptopenjdk-8
         command: |-
@@ -89,6 +96,7 @@ jobs:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
+    - setup_remote_docker
     - run:
         name: Build & pushadoptopenjdk-11
         command: |-
@@ -101,6 +109,7 @@ jobs:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
+    - setup_remote_docker
     - run:
         name: Build & pushadoptopenjdk-11-tools-deps-1.10.1.466
         command: |-
@@ -113,6 +122,7 @@ jobs:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
+    - setup_remote_docker
     - run:
         name: Build & pushadoptopenjdk-8-intel-mkl-2018.4-057
         command: |-
@@ -125,6 +135,7 @@ jobs:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
+    - setup_remote_docker
     - run:
         name: Build & pushadoptopenjdk-8-alpine-tools-deps-1.10.1.466
         command: |-
@@ -137,6 +148,7 @@ jobs:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
+    - setup_remote_docker
     - run:
         name: Build & pushadoptopenjdk-11-intel-mkl-2018.4-057-tools-deps-1.10.1.466
         command: |-
@@ -149,6 +161,7 @@ jobs:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
+    - setup_remote_docker
     - run:
         name: Build & pushadoptopenjdk-8-alpine-intel-mkl-2018.4-057-tools-deps-1.10.1.466
         command: |-
@@ -161,6 +174,7 @@ jobs:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
+    - setup_remote_docker
     - run:
         name: Build & pushadoptopenjdk-11-alpine
         command: |-
@@ -173,6 +187,7 @@ jobs:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
+    - setup_remote_docker
     - run:
         name: Build & pushadoptopenjdk-11-alpine-tools-deps-1.10.1.466
         command: |-
@@ -185,6 +200,7 @@ jobs:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
+    - setup_remote_docker
     - run:
         name: Build & pushadoptopenjdk-8-tools-deps-1.10.1.466
         command: |-
