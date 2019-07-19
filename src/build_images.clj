@@ -69,17 +69,13 @@
             :file       (io/file "dockerfiles" (str image-name ".Dockerfile"))}))
        image-variations))
 
-(def alphabet
-  (map (comp str char) (range 97 123)))
-
-(def alphabet-infinite
-  (map-indexed (fn [idx letter]
-                 (str/join (take (inc (int (/ idx 26))) (cycle [letter])))) (cycle alphabet)))
-
 (defn get-circleci-config-map
   [dockerfiles]
-  (let [dockerfiles (map (fn [idx m]
-                           (assoc m :job-name idx)) alphabet-infinite dockerfiles)]
+  (let [dockerfiles (map (fn [m]
+                           (assoc m
+                             :job-name
+                             ;; circleci doesn't allow periods in the job name
+                             (str/replace (:image-name m) "." "_"))) dockerfiles)]
     {:version   "2.1"
 
      :jobs      (reduce (fn [jobs-map {:keys [job-name image-name file]}]
