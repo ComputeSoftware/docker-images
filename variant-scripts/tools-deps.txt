@@ -1,4 +1,4 @@
 # https://clojure.org/guides/getting_started
 RUN curl -O https://download.clojure.org/install/linux-install-{{version}}.sh
 RUN chmod +x linux-install-{{version}}.sh
-RUN sudo ./linux-install-{{version}}.sh
+RUN ./linux-install-{{version}}.sh

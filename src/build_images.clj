@@ -13,15 +13,15 @@
   {:bases    [{:name          "adoptopenjdk-8"
                :image         "adoptopenjdk/openjdk8:jdk8u212-b04"
                :template-path debian-path}
-              {:name          "adoptopenjdk-8-alpine"
-               :image         "adoptopenjdk/openjdk8:jdk8u212-b04-alpine"
-               :template-path alpine-path}
+              #_{:name          "adoptopenjdk-8-alpine"
+                 :image         "adoptopenjdk/openjdk8:jdk8u212-b04-alpine"
+                 :template-path alpine-path}
               {:name          "adoptopenjdk-11"
                :image         "adoptopenjdk/openjdk11:jdk-11.0.3_7"
                :template-path debian-path}
-              {:name          "adoptopenjdk-11-alpine"
-               :image         "adoptopenjdk/openjdk11:jdk-11.0.3_7-alpine"
-               :template-path alpine-path}]
+              #_{:name          "adoptopenjdk-11-alpine"
+                 :image         "adoptopenjdk/openjdk11:jdk-11.0.3_7-alpine"
+                 :template-path alpine-path}]
    :variants (sorted-map
                "tools-deps" {:template-path "variant-scripts/tools-deps.txt"
                              :versions      ["1.10.1.466"]}
@@ -88,7 +88,7 @@
                             {:docker [{:image "docker:17.05.0-ce-git"}]
                              :steps  [:checkout
                                       :setup_remote_docker
-                                      {:run {:name    (str "Build & push" image-name)
+                                      {:run {:name    (str "Build & push " image-name)
                                              :command (str/join "\n"
                                                                 [(format "echo %s" image-name)
                                                                  (format "docker build -t computesoftware/%s:$CIRCLE_SHA1 . --file %s"
