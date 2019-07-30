@@ -50,7 +50,7 @@
                {base-template-path :template-path
                 base-image         :image} (get-in images-spec [:bases base])]
            {:image-name (name base)
-            :tag        variant-str-combo
+            :tag        (or variant-str-combo "base")
             :file-name  file-name
             :content    (str/join "\n\n"
                                   (concat [(render-file base-template-path {:from base-image})]
