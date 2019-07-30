@@ -58,12 +58,14 @@
            {:image-name (name base)
             :tag        (or variant-str-combo "base")
             :file-name  file-name
-            :content    (render-file base-template-path {:from    base-image
-                                                         :content (str/join "\n\n"
-                                                                            (map (fn [[variant template-vars]]
-                                                                                   (render-file (get-in images-spec [:variants variant :template-path])
-                                                                                                template-vars))
-                                                                                 variants))})
+            :content    (render-file base-template-path
+                                     {:from    base-image
+                                      :content (str/join "\n\n"
+                                                         (map (fn [[variant template-vars]]
+                                                                (render-file
+                                                                  (get-in images-spec [:variants variant :template-path])
+                                                                  template-vars))
+                                                              variants))})
             :file       (io/file "dockerfiles" (str file-name ".Dockerfile"))}))
        (:combos images-spec)))
 
