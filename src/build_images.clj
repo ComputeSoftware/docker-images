@@ -40,23 +40,24 @@
 (defn dockerfiles-content
   [images-spec]
   (map (fn [{:keys [base variants]}]
-         (let [image-name (str (name base)
-                               (when-not (empty? variants)
-                                 (str "-"
-                                      (str/join "-"
-                                                (map (fn [[variant-name {:keys [version]}]]
-                                                       (str (name variant-name) "-" version))
-                                                     (sort-by first variants))))))
+         (let [variant-str-combo (when-not (empty? variants)
+                                   (str/join "-"
+                                             (map (fn [[variant-name {:keys [version]}]]
+                                                    (str (name variant-name) "-" version))
+                                                  (sort-by first variants))))
+               file-name (str (name base) (when variant-str-combo
+                                            (str "-" variant-str-combo)))
                {base-template-path :template-path
                 base-image         :image} (get-in images-spec [:bases base])]
-           {:image-name image-name
+           {:image-name (name base)
+            :tag        variant-str-combo
             :content    (str/join "\n\n"
                                   (concat [(render-file base-template-path {:from base-image})]
                                           (map (fn [[variant template-vars]]
                                                  (render-file (get-in images-spec [:variants variant :template-path])
                                                               template-vars))
                                                variants)))
-            :file       (io/file "dockerfiles" (str image-name ".Dockerfile"))}))
+            :file       (io/file "dockerfiles" (str file-name ".Dockerfile"))}))
        (:combos images-spec)))
 
 (defn get-circleci-config-map
@@ -68,7 +69,7 @@
                              (str/replace (:image-name m) "." "_"))) dockerfiles)]
     {:version   "2.1"
 
-     :jobs      (reduce (fn [jobs-map {:keys [job-name image-name file]}]
+     :jobs      (reduce (fn [jobs-map {:keys [job-name image-name tag file]}]
                           (assoc jobs-map
                             job-name
                             {:docker [{:image "docker:17.05.0-ce-git"}]
@@ -77,8 +78,9 @@
                                       {:run {:name    (str "Build & push " image-name)
                                              :command (str/join "\n"
                                                                 [(format "echo %s" image-name)
-                                                                 (format "docker build -t computesoftware/%s:$CIRCLE_SHA1 . --file %s"
+                                                                 (format "docker build -t computesoftware/%s:%s . --file %s"
                                                                          image-name
+                                                                         tag
                                                                          (.getPath file))
                                                                  "docker login -u $DOCKER_USER -p $DOCKER_PASS"
                                                                  (format "docker push computesoftware/%s:$CIRCLE_SHA1"
