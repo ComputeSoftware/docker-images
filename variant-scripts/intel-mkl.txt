@@ -10,3 +10,5 @@ RUN apt-get update
 RUN apt-get install intel-mkl-64bit-{{version}} -y
 
 ENV LD_LIBRARY_PATH /opt/intel/compilers_and_libraries_2018.5.274/linux/mkl/lib/intel64_lin:/opt/intel/compilers_and_libraries_2018.5.274/linux/compiler/lib/intel64_lin
+
+USER appuser
