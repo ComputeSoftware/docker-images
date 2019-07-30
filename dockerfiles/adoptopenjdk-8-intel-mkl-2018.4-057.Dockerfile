@@ -3,8 +3,6 @@ FROM adoptopenjdk/openjdk8:jdk8u212-b04
 RUN apt-get update
 RUN apt-get install -y wget gnupg
 
-USER root
-
 # Intel install guide: https://software.intel.com/en-us/articles/installing-intel-free-libs-and-python-apt-repo
 # Blog post install guide: http://dirk.eddelbuettel.com/blog/2018/04/15/
 RUN apt-get update

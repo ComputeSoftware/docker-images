@@ -8,8 +8,6 @@ RUN curl -O https://download.clojure.org/install/linux-install-1.10.1.466.sh
 RUN chmod +x linux-install-1.10.1.466.sh
 RUN ./linux-install-1.10.1.466.sh
 
-USER root
-
 # Intel install guide: https://software.intel.com/en-us/articles/installing-intel-free-libs-and-python-apt-repo
 # Blog post install guide: http://dirk.eddelbuettel.com/blog/2018/04/15/
 RUN apt-get update
