@@ -84,8 +84,9 @@
                                                                          tag
                                                                          (.getPath file))
                                                                  "docker login -u $DOCKER_USER -p $DOCKER_PASS"
-                                                                 (format "docker push computesoftware/%s:$CIRCLE_SHA1"
-                                                                         image-name)])}}]}))
+                                                                 (format "docker push computesoftware/%s:%s"
+                                                                         image-name
+                                                                         tag)])}}]}))
                         {} dockerfiles)
 
      :workflows {:version     "2"
