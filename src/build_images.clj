@@ -51,6 +51,7 @@
                 base-image         :image} (get-in images-spec [:bases base])]
            {:image-name (name base)
             :tag        variant-str-combo
+            :file-name  file-name
             :content    (str/join "\n\n"
                                   (concat [(render-file base-template-path {:from base-image})]
                                           (map (fn [[variant template-vars]]
@@ -66,7 +67,7 @@
                            (assoc m
                              :job-name
                              ;; circleci doesn't allow periods in the job name
-                             (str/replace (:image-name m) "." "_"))) dockerfiles)]
+                             (str/replace (:file-name m) "." "_"))) dockerfiles)]
     {:version   "2.1"
 
      :jobs      (reduce (fn [jobs-map {:keys [job-name image-name tag file]}]

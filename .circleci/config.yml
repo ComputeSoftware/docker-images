@@ -10,10 +10,62 @@ jobs:
         name: Build & push adoptopenjdk-8
         command: |-
           echo adoptopenjdk-8
+          docker build -t computesoftware/adoptopenjdk-8:null . --file dockerfiles/adoptopenjdk-8.Dockerfile
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push computesoftware/adoptopenjdk-8:$CIRCLE_SHA1
+  adoptopenjdk-8-tools-deps-1_10_1_466:
+    docker:
+    - {image: 'docker:17.05.0-ce-git'}
+    steps:
+    - checkout
+    - setup_remote_docker
+    - run:
+        name: Build & push adoptopenjdk-8
+        command: |-
+          echo adoptopenjdk-8
+          docker build -t computesoftware/adoptopenjdk-8:tools-deps-1.10.1.466 . --file dockerfiles/adoptopenjdk-8-tools-deps-1.10.1.466.Dockerfile
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push computesoftware/adoptopenjdk-8:$CIRCLE_SHA1
+  adoptopenjdk-8-intel-mkl-2018_4-057-tools-deps-1_10_1_466:
+    docker:
+    - {image: 'docker:17.05.0-ce-git'}
+    steps:
+    - checkout
+    - setup_remote_docker
+    - run:
+        name: Build & push adoptopenjdk-8
+        command: |-
+          echo adoptopenjdk-8
           docker build -t computesoftware/adoptopenjdk-8:intel-mkl-2018.4-057-tools-deps-1.10.1.466 . --file dockerfiles/adoptopenjdk-8-intel-mkl-2018.4-057-tools-deps-1.10.1.466.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push computesoftware/adoptopenjdk-8:$CIRCLE_SHA1
   adoptopenjdk-11:
+    docker:
+    - {image: 'docker:17.05.0-ce-git'}
+    steps:
+    - checkout
+    - setup_remote_docker
+    - run:
+        name: Build & push adoptopenjdk-11
+        command: |-
+          echo adoptopenjdk-11
+          docker build -t computesoftware/adoptopenjdk-11:null . --file dockerfiles/adoptopenjdk-11.Dockerfile
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push computesoftware/adoptopenjdk-11:$CIRCLE_SHA1
+  adoptopenjdk-11-tools-deps-1_10_1_466:
+    docker:
+    - {image: 'docker:17.05.0-ce-git'}
+    steps:
+    - checkout
+    - setup_remote_docker
+    - run:
+        name: Build & push adoptopenjdk-11
+        command: |-
+          echo adoptopenjdk-11
+          docker build -t computesoftware/adoptopenjdk-11:tools-deps-1.10.1.466 . --file dockerfiles/adoptopenjdk-11-tools-deps-1.10.1.466.Dockerfile
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push computesoftware/adoptopenjdk-11:$CIRCLE_SHA1
+  adoptopenjdk-11-intel-mkl-2018_4-057-tools-deps-1_10_1_466:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
@@ -31,8 +83,8 @@ workflows:
   ci-workflow:
     jobs:
     - adoptopenjdk-8: {context: docker-env}
-    - adoptopenjdk-8: {context: docker-env}
-    - adoptopenjdk-8: {context: docker-env}
+    - adoptopenjdk-8-tools-deps-1_10_1_466: {context: docker-env}
+    - adoptopenjdk-8-intel-mkl-2018_4-057-tools-deps-1_10_1_466: {context: docker-env}
     - adoptopenjdk-11: {context: docker-env}
-    - adoptopenjdk-11: {context: docker-env}
-    - adoptopenjdk-11: {context: docker-env}
+    - adoptopenjdk-11-tools-deps-1_10_1_466: {context: docker-env}
+    - adoptopenjdk-11-intel-mkl-2018_4-057-tools-deps-1_10_1_466: {context: docker-env}
