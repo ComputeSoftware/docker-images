@@ -2,7 +2,6 @@
   (:require
     [clojure.string :as str]
     [clojure.java.io :as io]
-    [clojure.math.combinatorics :as combo]
     [cljstache.core :as mustache]
     [clj-yaml.core :as yaml]))
 
@@ -10,64 +9,55 @@
 (def alpine-path "base-templates/alpine.txt")
 
 (def all-images
-  {:bases    [{:name          "adoptopenjdk-8"
-               :image         "adoptopenjdk/openjdk8:jdk8u212-b04"
-               :template-path debian-path}
-              #_{:name          "adoptopenjdk-8-alpine"
-                 :image         "adoptopenjdk/openjdk8:jdk8u212-b04-alpine"
-                 :template-path alpine-path}
-              {:name          "adoptopenjdk-11"
-               :image         "adoptopenjdk/openjdk11:jdk-11.0.3_7"
-               :template-path debian-path}
-              #_{:name          "adoptopenjdk-11-alpine"
-                 :image         "adoptopenjdk/openjdk11:jdk-11.0.3_7-alpine"
-                 :template-path alpine-path}]
-   :variants (sorted-map
-               "tools-deps" {:template-path "variant-scripts/tools-deps.txt"
-                             :versions      ["1.10.1.466"]}
-               "intel-mkl" {:template-path "variant-scripts/intel-mkl.txt"
-                            :versions      ["2018.4-057"]})})
+  {:bases    {:adoptopenjdk-8  {:image         "adoptopenjdk/openjdk8:jdk8u212-b04"
+                                :template-path debian-path}
+              :adoptopenjdk-11 {:image         "adoptopenjdk/openjdk11:jdk-11.0.3_7"
+                                :template-path debian-path}}
+   :variants {:tools-deps {:template-path "variant-scripts/tools-deps.txt"}
+              :intel-mkl  {:template-path "variant-scripts/intel-mkl.txt"}}
+   :combos   [{:base :adoptopenjdk-8}
 
+              {:base     :adoptopenjdk-8
+               :variants [[:tools-deps {:version "1.10.1.466"}]]}
 
-(defn expand-variants
-  [variants]
-  (for [[variant-name {:keys [versions template-path]}] variants
-        version versions]
-    {:variant/name          variant-name
-     :variant/version       version
-     :variant/template-path template-path}))
+              {:base     :adoptopenjdk-8
+               :variants [[:tools-deps {:version "1.10.1.466"}]
+                          [:intel-mkl {:version "2018.4-057"}]]}
 
-(defn enumerate-image-variations
-  [bases variants]
-  (let [expanded-variants (expand-variants variants)
-        variant-subsets (combo/subsets expanded-variants)]
-    (for [base bases
-          variant-set variant-subsets]
-      {:base     base
-       :variants variant-set})))
+              {:base :adoptopenjdk-11}
+
+              {:base     :adoptopenjdk-11
+               :variants [[:tools-deps {:version "1.10.1.466"}]]}
+
+              {:base     :adoptopenjdk-11
+               :variants [[:tools-deps {:version "1.10.1.466"}]
+                          [:intel-mkl {:version "2018.4-057"}]]}]})
 
 (defn render-file
   [path template-vars]
   (mustache/render (slurp path) template-vars))
 
 (defn dockerfiles-content
-  [image-variations]
+  [images-spec]
   (map (fn [{:keys [base variants]}]
-         (let [image-name (str (:name base)
+         (let [image-name (str (name base)
                                (when-not (empty? variants)
                                  (str "-"
                                       (str/join "-"
-                                                (map (fn [{variant-name :variant/name
-                                                           version      :variant/version}]
-                                                       (str variant-name "-" version))
-                                                     (sort-by :variant/name variants))))))]
+                                                (map (fn [[variant-name {:keys [version]}]]
+                                                       (str (name variant-name) "-" version))
+                                                     (sort-by first variants))))))
+               {base-template-path :template-path
+                base-image         :image} (get-in images-spec [:bases base])]
            {:image-name image-name
             :content    (str/join "\n\n"
-                                  (concat [(render-file (:template-path base) {:from (:image base)})]
-                                          (map (fn [{:variant/keys [version template-path]}]
-                                                 (render-file template-path {:version version})) variants)))
+                                  (concat [(render-file base-template-path {:from base-image})]
+                                          (map (fn [[variant template-vars]]
+                                                 (render-file (get-in images-spec [:variants variant :template-path])
+                                                              template-vars))
+                                               variants)))
             :file       (io/file "dockerfiles" (str image-name ".Dockerfile"))}))
-       image-variations))
+       (:combos images-spec)))
 
 (defn get-circleci-config-map
   [dockerfiles]
@@ -101,9 +91,8 @@
                                           dockerfiles)}}}))
 
 (defn write-ci-and-dockerfiles
-  [{:keys [bases variants]}]
-  (let [image-variations (enumerate-image-variations bases variants)
-        dockerfiles (dockerfiles-content image-variations)
+  [images-spec]
+  (let [dockerfiles (dockerfiles-content images-spec)
         ci-config-map (get-circleci-config-map dockerfiles)]
 
     (doseq [{:keys [file content]} dockerfiles]
