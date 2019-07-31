@@ -14,6 +14,6 @@ RUN apt-get install intel-mkl-64bit-2018.4-057 -y
 
 ENV LD_LIBRARY_PATH /opt/intel/compilers_and_libraries_2018.5.274/linux/mkl/lib/intel64_lin:/opt/intel/compilers_and_libraries_2018.5.274/linux/compiler/lib/intel64_lin
 
-RUN groupadd --gid 3434 appuser \
-  && useradd --uid 3434 --gid appuser --shell /bin/bash --create-home appuser
-USER appuser
+RUN groupadd --gid 3434 circleci \
+  && useradd --uid 3434 --gid circleci --shell /bin/bash --create-home circleci
+USER circleci
