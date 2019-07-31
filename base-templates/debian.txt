@@ -5,6 +5,6 @@ RUN apt-get install -y wget gnupg
 
 {{{content}}}
 
-RUN groupadd --gid 3434 appuser \
-  && useradd --uid 3434 --gid appuser --shell /bin/bash --create-home appuser
-USER appuser
+RUN groupadd --gid 3434 circleci \
+  && useradd --uid 3434 --gid circleci --shell /bin/bash --create-home circleci
+USER circleci
