@@ -1,3 +1,5 @@
+RUN apt-get update && apt-get install ssh git -y
+
 # https://clojure.org/guides/getting_started
 RUN curl -O https://download.clojure.org/install/linux-install-{{version}}.sh
 RUN chmod +x linux-install-{{version}}.sh
