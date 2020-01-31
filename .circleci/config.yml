@@ -13,7 +13,7 @@ jobs:
           docker build -t computesoftware/adoptopenjdk-8:base . --file dockerfiles/adoptopenjdk-8.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push computesoftware/adoptopenjdk-8:base
-  adoptopenjdk-8-tools-deps-1_10_1_502:
+  adoptopenjdk-8-tools-deps-1_10_1_507:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
@@ -23,9 +23,9 @@ jobs:
         name: Build & push adoptopenjdk-8
         command: |-
           echo adoptopenjdk-8
-          docker build -t computesoftware/adoptopenjdk-8:tools-deps-1.10.1.502 . --file dockerfiles/adoptopenjdk-8-tools-deps-1.10.1.502.Dockerfile
+          docker build -t computesoftware/adoptopenjdk-8:tools-deps-1.10.1.507 . --file dockerfiles/adoptopenjdk-8-tools-deps-1.10.1.507.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-8:tools-deps-1.10.1.502
+          docker push computesoftware/adoptopenjdk-8:tools-deps-1.10.1.507
   adoptopenjdk-8-intel-mkl-2018_4-057:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
@@ -39,7 +39,7 @@ jobs:
           docker build -t computesoftware/adoptopenjdk-8:intel-mkl-2018.4-057 . --file dockerfiles/adoptopenjdk-8-intel-mkl-2018.4-057.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push computesoftware/adoptopenjdk-8:intel-mkl-2018.4-057
-  adoptopenjdk-8-intel-mkl-2018_4-057-tools-deps-1_10_1_502:
+  adoptopenjdk-8-intel-mkl-2018_4-057-tools-deps-1_10_1_507:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
@@ -49,9 +49,9 @@ jobs:
         name: Build & push adoptopenjdk-8
         command: |-
           echo adoptopenjdk-8
-          docker build -t computesoftware/adoptopenjdk-8:intel-mkl-2018.4-057-tools-deps-1.10.1.502 . --file dockerfiles/adoptopenjdk-8-intel-mkl-2018.4-057-tools-deps-1.10.1.502.Dockerfile
+          docker build -t computesoftware/adoptopenjdk-8:intel-mkl-2018.4-057-tools-deps-1.10.1.507 . --file dockerfiles/adoptopenjdk-8-intel-mkl-2018.4-057-tools-deps-1.10.1.507.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-8:intel-mkl-2018.4-057-tools-deps-1.10.1.502
+          docker push computesoftware/adoptopenjdk-8:intel-mkl-2018.4-057-tools-deps-1.10.1.507
   adoptopenjdk-11:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
@@ -65,7 +65,7 @@ jobs:
           docker build -t computesoftware/adoptopenjdk-11:base . --file dockerfiles/adoptopenjdk-11.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push computesoftware/adoptopenjdk-11:base
-  adoptopenjdk-11-tools-deps-1_10_1_502:
+  adoptopenjdk-11-tools-deps-1_10_1_507:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
@@ -75,9 +75,9 @@ jobs:
         name: Build & push adoptopenjdk-11
         command: |-
           echo adoptopenjdk-11
-          docker build -t computesoftware/adoptopenjdk-11:tools-deps-1.10.1.502 . --file dockerfiles/adoptopenjdk-11-tools-deps-1.10.1.502.Dockerfile
+          docker build -t computesoftware/adoptopenjdk-11:tools-deps-1.10.1.507 . --file dockerfiles/adoptopenjdk-11-tools-deps-1.10.1.507.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-11:tools-deps-1.10.1.502
+          docker push computesoftware/adoptopenjdk-11:tools-deps-1.10.1.507
   adoptopenjdk-11-intel-mkl-2018_4-057:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
@@ -91,7 +91,7 @@ jobs:
           docker build -t computesoftware/adoptopenjdk-11:intel-mkl-2018.4-057 . --file dockerfiles/adoptopenjdk-11-intel-mkl-2018.4-057.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push computesoftware/adoptopenjdk-11:intel-mkl-2018.4-057
-  adoptopenjdk-11-intel-mkl-2018_4-057-tools-deps-1_10_1_502:
+  adoptopenjdk-11-intel-mkl-2018_4-057-tools-deps-1_10_1_507:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
@@ -101,18 +101,18 @@ jobs:
         name: Build & push adoptopenjdk-11
         command: |-
           echo adoptopenjdk-11
-          docker build -t computesoftware/adoptopenjdk-11:intel-mkl-2018.4-057-tools-deps-1.10.1.502 . --file dockerfiles/adoptopenjdk-11-intel-mkl-2018.4-057-tools-deps-1.10.1.502.Dockerfile
+          docker build -t computesoftware/adoptopenjdk-11:intel-mkl-2018.4-057-tools-deps-1.10.1.507 . --file dockerfiles/adoptopenjdk-11-intel-mkl-2018.4-057-tools-deps-1.10.1.507.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-11:intel-mkl-2018.4-057-tools-deps-1.10.1.502
+          docker push computesoftware/adoptopenjdk-11:intel-mkl-2018.4-057-tools-deps-1.10.1.507
 workflows:
   version: '2'
   ci-workflow:
     jobs:
     - adoptopenjdk-8: {context: docker-env}
-    - adoptopenjdk-8-tools-deps-1_10_1_502: {context: docker-env}
+    - adoptopenjdk-8-tools-deps-1_10_1_507: {context: docker-env}
     - adoptopenjdk-8-intel-mkl-2018_4-057: {context: docker-env}
-    - adoptopenjdk-8-intel-mkl-2018_4-057-tools-deps-1_10_1_502: {context: docker-env}
+    - adoptopenjdk-8-intel-mkl-2018_4-057-tools-deps-1_10_1_507: {context: docker-env}
     - adoptopenjdk-11: {context: docker-env}
-    - adoptopenjdk-11-tools-deps-1_10_1_502: {context: docker-env}
+    - adoptopenjdk-11-tools-deps-1_10_1_507: {context: docker-env}
     - adoptopenjdk-11-intel-mkl-2018_4-057: {context: docker-env}
-    - adoptopenjdk-11-intel-mkl-2018_4-057-tools-deps-1_10_1_502: {context: docker-env}
+    - adoptopenjdk-11-intel-mkl-2018_4-057-tools-deps-1_10_1_507: {context: docker-env}

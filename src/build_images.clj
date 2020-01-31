@@ -18,25 +18,25 @@
    :combos   [{:base :adoptopenjdk-8}
 
               {:base     :adoptopenjdk-8
-               :variants [[:tools-deps {:version "1.10.1.502"}]]}
+               :variants [[:tools-deps {:version "1.10.1.507"}]]}
 
               {:base     :adoptopenjdk-8
                :variants [[:intel-mkl {:version "2018.4-057"}]]}
 
               {:base     :adoptopenjdk-8
-               :variants [[:tools-deps {:version "1.10.1.502"}]
+               :variants [[:tools-deps {:version "1.10.1.507"}]
                           [:intel-mkl {:version "2018.4-057"}]]}
 
               {:base :adoptopenjdk-11}
 
               {:base     :adoptopenjdk-11
-               :variants [[:tools-deps {:version "1.10.1.502"}]]}
+               :variants [[:tools-deps {:version "1.10.1.507"}]]}
 
               {:base     :adoptopenjdk-11
                :variants [[:intel-mkl {:version "2018.4-057"}]]}
 
               {:base     :adoptopenjdk-11
-               :variants [[:tools-deps {:version "1.10.1.502"}]
+               :variants [[:tools-deps {:version "1.10.1.507"}]
                           [:intel-mkl {:version "2018.4-057"}]]}]})
 
 (defn render-file
