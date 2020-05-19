@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:jdk-11.0.3_7
+FROM adoptopenjdk/openjdk11:jdk-11.0.7_10
 
 RUN apt-get update
 RUN apt-get install -y wget gnupg

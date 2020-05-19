@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk8:jdk8u212-b04
+FROM adoptopenjdk/openjdk8:jdk8u252-b09
 
 RUN apt-get update
 RUN apt-get install -y wget gnupg

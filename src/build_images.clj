@@ -9,9 +9,9 @@
 (def alpine-path "base-templates/alpine.txt")
 
 (def all-images
-  {:bases    {:adoptopenjdk-8  {:image         "adoptopenjdk/openjdk8:jdk8u212-b04"
+  {:bases    {:adoptopenjdk-8  {:image         "adoptopenjdk/openjdk8:jdk8u252-b09"
                                 :template-path debian-path}
-              :adoptopenjdk-11 {:image         "adoptopenjdk/openjdk11:jdk-11.0.3_7"
+              :adoptopenjdk-11 {:image         "adoptopenjdk/openjdk11:jdk-11.0.7_10"
                                 :template-path debian-path}}
    :variants {:tools-deps {:template-path "variant-scripts/tools-deps.txt"}
               :intel-mkl  {:template-path "variant-scripts/intel-mkl.txt"}}
