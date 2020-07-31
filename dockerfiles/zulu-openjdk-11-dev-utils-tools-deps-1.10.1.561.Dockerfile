@@ -1,7 +1,7 @@
 FROM azul/zulu-openjdk:11.0.7-11.39.15
 
 RUN apt-get update
-RUN apt-get install -y wget gnupg
+RUN apt-get install -y wget gnupg curl
 
 RUN apt-get update && apt-get install ssh git curl -y
 

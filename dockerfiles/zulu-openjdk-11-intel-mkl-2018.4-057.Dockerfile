@@ -1,7 +1,7 @@
 FROM azul/zulu-openjdk:11.0.7-11.39.15
 
 RUN apt-get update
-RUN apt-get install -y wget gnupg
+RUN apt-get install -y wget gnupg curl
 
 # Intel install guide: https://software.intel.com/en-us/articles/installing-intel-free-libs-and-python-apt-repo
 # Blog post install guide: http://dirk.eddelbuettel.com/blog/2018/04/15/
