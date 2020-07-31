@@ -8,36 +8,44 @@
 (def debian-path "base-templates/debian.txt")
 (def alpine-path "base-templates/alpine.txt")
 
+(def tdeps-version "1.10.1.561")
+
 (def all-images
-  {:bases    {:adoptopenjdk-8  {:image         "adoptopenjdk/openjdk8:jdk8u252-b09"
+  {:bases    {:zulu-openjdk-8  {:image         "azul/zulu-openjdk:8u252-8.46.0.19"
                                 :template-path debian-path}
-              :adoptopenjdk-11 {:image         "adoptopenjdk/openjdk11:jdk-11.0.7_10"
+              :zulu-openjdk-11 {:image         "azul/zulu-openjdk:11.0.7-11.39.15"
                                 :template-path debian-path}}
    :variants {:tools-deps {:template-path "variant-scripts/tools-deps.txt"}
-              :intel-mkl  {:template-path "variant-scripts/intel-mkl.txt"}}
-   :combos   [{:base :adoptopenjdk-8}
+              :intel-mkl  {:template-path "variant-scripts/intel-mkl.txt"}
+              :dev-utils  {:template-path "variant-scripts/dev-utils.txt"}}
+   :combos   [{:base :zulu-openjdk-8}
 
-              {:base     :adoptopenjdk-8
-               :variants [[:tools-deps {:version "1.10.1.507"}]]}
+              {:base     :zulu-openjdk-8
+               :variants [[:tools-deps {:version tdeps-version}]
+                          [:dev-utils]]}
 
-              {:base     :adoptopenjdk-8
+              {:base     :zulu-openjdk-8
+               :name     ""
                :variants [[:intel-mkl {:version "2018.4-057"}]]}
 
-              {:base     :adoptopenjdk-8
-               :variants [[:tools-deps {:version "1.10.1.507"}]
-                          [:intel-mkl {:version "2018.4-057"}]]}
+              {:base     :zulu-openjdk-8
+               :variants [[:tools-deps {:version tdeps-version}]
+                          [:intel-mkl {:version "2018.4-057"}]
+                          [:dev-utils]]}
 
-              {:base :adoptopenjdk-11}
+              {:base :zulu-openjdk-11}
 
-              {:base     :adoptopenjdk-11
-               :variants [[:tools-deps {:version "1.10.1.507"}]]}
+              {:base     :zulu-openjdk-11
+               :variants [[:tools-deps {:version tdeps-version}]
+                          [:dev-utils]]}
 
-              {:base     :adoptopenjdk-11
+              {:base     :zulu-openjdk-11
                :variants [[:intel-mkl {:version "2018.4-057"}]]}
 
-              {:base     :adoptopenjdk-11
-               :variants [[:tools-deps {:version "1.10.1.507"}]
-                          [:intel-mkl {:version "2018.4-057"}]]}]})
+              {:base     :zulu-openjdk-11
+               :variants [[:tools-deps {:version tdeps-version}]
+                          [:intel-mkl {:version "2018.4-057"}]
+                          [:dev-utils]]}]})
 
 (defn render-file
   [path template-vars]
@@ -49,14 +57,16 @@
          (let [variant-str-combo (when-not (empty? variants)
                                    (str/join "-"
                                              (map (fn [[variant-name {:keys [version]}]]
-                                                    (str (name variant-name) "-" version))
+                                                    (str (name variant-name)
+                                                         (when version
+                                                           (str "-" version))))
                                                   (sort-by first variants))))
                file-name (str (name base) (when variant-str-combo
                                             (str "-" variant-str-combo)))
                {base-template-path :template-path
                 base-image         :image} (get-in images-spec [:bases base])]
            {:image-name (name base)
-            :tag        (or variant-str-combo "base")
+            :tag        (str (or variant-str-combo "base") "-" "$(echo $CIRCLE_SHA1 | cut -c -7)")
             :file-name  file-name
             :content    (render-file base-template-path
                                      {:from    base-image
