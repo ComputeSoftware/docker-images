@@ -1,118 +1,118 @@
 version: '2.1'
 jobs:
-  adoptopenjdk-8:
+  zulu-openjdk-8:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
     - setup_remote_docker
     - run:
-        name: Build & push adoptopenjdk-8
+        name: Build & push zulu-openjdk-8
         command: |-
-          echo adoptopenjdk-8
-          docker build -t computesoftware/adoptopenjdk-8:base . --file dockerfiles/adoptopenjdk-8.Dockerfile
+          echo zulu-openjdk-8
+          docker build -t computesoftware/zulu-openjdk-8:-$(echo $CIRCLE_SHA1 | cut -c -7) . --file dockerfiles/zulu-openjdk-8.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-8:base
-  adoptopenjdk-8-tools-deps-1_10_1_507:
+          docker push computesoftware/zulu-openjdk-8:-$(echo $CIRCLE_SHA1 | cut -c -7)
+  zulu-openjdk-8-tools-deps-1_10_1_561:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
     - setup_remote_docker
     - run:
-        name: Build & push adoptopenjdk-8
+        name: Build & push zulu-openjdk-8
         command: |-
-          echo adoptopenjdk-8
-          docker build -t computesoftware/adoptopenjdk-8:tools-deps-1.10.1.507 . --file dockerfiles/adoptopenjdk-8-tools-deps-1.10.1.507.Dockerfile
+          echo zulu-openjdk-8
+          docker build -t computesoftware/zulu-openjdk-8:tools-deps-1.10.1.561-$(echo $CIRCLE_SHA1 | cut -c -7) . --file dockerfiles/zulu-openjdk-8-tools-deps-1.10.1.561.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-8:tools-deps-1.10.1.507
-  adoptopenjdk-8-intel-mkl-2018_4-057:
+          docker push computesoftware/zulu-openjdk-8:tools-deps-1.10.1.561-$(echo $CIRCLE_SHA1 | cut -c -7)
+  zulu-openjdk-8-intel-mkl-2018_4-057:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
     - setup_remote_docker
     - run:
-        name: Build & push adoptopenjdk-8
+        name: Build & push zulu-openjdk-8
         command: |-
-          echo adoptopenjdk-8
-          docker build -t computesoftware/adoptopenjdk-8:intel-mkl-2018.4-057 . --file dockerfiles/adoptopenjdk-8-intel-mkl-2018.4-057.Dockerfile
+          echo zulu-openjdk-8
+          docker build -t computesoftware/zulu-openjdk-8:intel-mkl-2018.4-057-$(echo $CIRCLE_SHA1 | cut -c -7) . --file dockerfiles/zulu-openjdk-8-intel-mkl-2018.4-057.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-8:intel-mkl-2018.4-057
-  adoptopenjdk-8-intel-mkl-2018_4-057-tools-deps-1_10_1_507:
+          docker push computesoftware/zulu-openjdk-8:intel-mkl-2018.4-057-$(echo $CIRCLE_SHA1 | cut -c -7)
+  zulu-openjdk-8-intel-mkl-2018_4-057-tools-deps-1_10_1_561:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
     - setup_remote_docker
     - run:
-        name: Build & push adoptopenjdk-8
+        name: Build & push zulu-openjdk-8
         command: |-
-          echo adoptopenjdk-8
-          docker build -t computesoftware/adoptopenjdk-8:intel-mkl-2018.4-057-tools-deps-1.10.1.507 . --file dockerfiles/adoptopenjdk-8-intel-mkl-2018.4-057-tools-deps-1.10.1.507.Dockerfile
+          echo zulu-openjdk-8
+          docker build -t computesoftware/zulu-openjdk-8:intel-mkl-2018.4-057-tools-deps-1.10.1.561-$(echo $CIRCLE_SHA1 | cut -c -7) . --file dockerfiles/zulu-openjdk-8-intel-mkl-2018.4-057-tools-deps-1.10.1.561.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-8:intel-mkl-2018.4-057-tools-deps-1.10.1.507
-  adoptopenjdk-11:
+          docker push computesoftware/zulu-openjdk-8:intel-mkl-2018.4-057-tools-deps-1.10.1.561-$(echo $CIRCLE_SHA1 | cut -c -7)
+  zulu-openjdk-11:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
     - setup_remote_docker
     - run:
-        name: Build & push adoptopenjdk-11
+        name: Build & push zulu-openjdk-11
         command: |-
-          echo adoptopenjdk-11
-          docker build -t computesoftware/adoptopenjdk-11:base . --file dockerfiles/adoptopenjdk-11.Dockerfile
+          echo zulu-openjdk-11
+          docker build -t computesoftware/zulu-openjdk-11:-$(echo $CIRCLE_SHA1 | cut -c -7) . --file dockerfiles/zulu-openjdk-11.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-11:base
-  adoptopenjdk-11-tools-deps-1_10_1_507:
+          docker push computesoftware/zulu-openjdk-11:-$(echo $CIRCLE_SHA1 | cut -c -7)
+  zulu-openjdk-11-tools-deps-1_10_1_561:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
     - setup_remote_docker
     - run:
-        name: Build & push adoptopenjdk-11
+        name: Build & push zulu-openjdk-11
         command: |-
-          echo adoptopenjdk-11
-          docker build -t computesoftware/adoptopenjdk-11:tools-deps-1.10.1.507 . --file dockerfiles/adoptopenjdk-11-tools-deps-1.10.1.507.Dockerfile
+          echo zulu-openjdk-11
+          docker build -t computesoftware/zulu-openjdk-11:tools-deps-1.10.1.561-$(echo $CIRCLE_SHA1 | cut -c -7) . --file dockerfiles/zulu-openjdk-11-tools-deps-1.10.1.561.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-11:tools-deps-1.10.1.507
-  adoptopenjdk-11-intel-mkl-2018_4-057:
+          docker push computesoftware/zulu-openjdk-11:tools-deps-1.10.1.561-$(echo $CIRCLE_SHA1 | cut -c -7)
+  zulu-openjdk-11-intel-mkl-2018_4-057:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
     - setup_remote_docker
     - run:
-        name: Build & push adoptopenjdk-11
+        name: Build & push zulu-openjdk-11
         command: |-
-          echo adoptopenjdk-11
-          docker build -t computesoftware/adoptopenjdk-11:intel-mkl-2018.4-057 . --file dockerfiles/adoptopenjdk-11-intel-mkl-2018.4-057.Dockerfile
+          echo zulu-openjdk-11
+          docker build -t computesoftware/zulu-openjdk-11:intel-mkl-2018.4-057-$(echo $CIRCLE_SHA1 | cut -c -7) . --file dockerfiles/zulu-openjdk-11-intel-mkl-2018.4-057.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-11:intel-mkl-2018.4-057
-  adoptopenjdk-11-intel-mkl-2018_4-057-tools-deps-1_10_1_507:
+          docker push computesoftware/zulu-openjdk-11:intel-mkl-2018.4-057-$(echo $CIRCLE_SHA1 | cut -c -7)
+  zulu-openjdk-11-intel-mkl-2018_4-057-tools-deps-1_10_1_561:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
     steps:
     - checkout
     - setup_remote_docker
     - run:
-        name: Build & push adoptopenjdk-11
+        name: Build & push zulu-openjdk-11
         command: |-
-          echo adoptopenjdk-11
-          docker build -t computesoftware/adoptopenjdk-11:intel-mkl-2018.4-057-tools-deps-1.10.1.507 . --file dockerfiles/adoptopenjdk-11-intel-mkl-2018.4-057-tools-deps-1.10.1.507.Dockerfile
+          echo zulu-openjdk-11
+          docker build -t computesoftware/zulu-openjdk-11:intel-mkl-2018.4-057-tools-deps-1.10.1.561-$(echo $CIRCLE_SHA1 | cut -c -7) . --file dockerfiles/zulu-openjdk-11-intel-mkl-2018.4-057-tools-deps-1.10.1.561.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/adoptopenjdk-11:intel-mkl-2018.4-057-tools-deps-1.10.1.507
+          docker push computesoftware/zulu-openjdk-11:intel-mkl-2018.4-057-tools-deps-1.10.1.561-$(echo $CIRCLE_SHA1 | cut -c -7)
 workflows:
   version: '2'
   ci-workflow:
     jobs:
-    - adoptopenjdk-8: {context: docker-env}
-    - adoptopenjdk-8-tools-deps-1_10_1_507: {context: docker-env}
-    - adoptopenjdk-8-intel-mkl-2018_4-057: {context: docker-env}
-    - adoptopenjdk-8-intel-mkl-2018_4-057-tools-deps-1_10_1_507: {context: docker-env}
-    - adoptopenjdk-11: {context: docker-env}
-    - adoptopenjdk-11-tools-deps-1_10_1_507: {context: docker-env}
-    - adoptopenjdk-11-intel-mkl-2018_4-057: {context: docker-env}
-    - adoptopenjdk-11-intel-mkl-2018_4-057-tools-deps-1_10_1_507: {context: docker-env}
+    - zulu-openjdk-8: {context: docker-env}
+    - zulu-openjdk-8-tools-deps-1_10_1_561: {context: docker-env}
+    - zulu-openjdk-8-intel-mkl-2018_4-057: {context: docker-env}
+    - zulu-openjdk-8-intel-mkl-2018_4-057-tools-deps-1_10_1_561: {context: docker-env}
+    - zulu-openjdk-11: {context: docker-env}
+    - zulu-openjdk-11-tools-deps-1_10_1_561: {context: docker-env}
+    - zulu-openjdk-11-intel-mkl-2018_4-057: {context: docker-env}
+    - zulu-openjdk-11-intel-mkl-2018_4-057-tools-deps-1_10_1_561: {context: docker-env}
