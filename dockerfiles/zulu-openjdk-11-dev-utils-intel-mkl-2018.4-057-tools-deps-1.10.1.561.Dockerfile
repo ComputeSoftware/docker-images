@@ -21,10 +21,28 @@ RUN apt-get install intel-mkl-64bit-2018.4-057 -y
 
 ENV LD_LIBRARY_PATH /opt/intel/compilers_and_libraries_2018.5.274/linux/mkl/lib/intel64_lin:/opt/intel/compilers_and_libraries_2018.5.274/linux/compiler/lib/intel64_lin
 
-RUN apt install build-essential wget unzip -y
+RUN apt install \
+      build-essential \
+      wget \
+      unzip \
+      apt-transport-https \
+      ca-certificates \
+      curl \
+      gnupg-agent \
+      software-properties-common \
+      vim \
+      -y
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-RUN unzip awscliv2.zip
+RUN unzip -q awscliv2.zip
 RUN ./aws/install
+
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+RUN add-apt-repository \
+       "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+       $(lsb_release -cs) \
+       stable"
+RUN apt update
+RUN apt install docker-ce docker-ce-cli containerd.io -y
 
 RUN groupadd --gid 3434 circleci \
   && useradd --uid 3434 --gid circleci --shell /bin/bash --create-home circleci
