@@ -59,7 +59,7 @@
                {base-template-path :template-path
                 base-image         :image} (get-in images-spec [:bases base])]
            {:image-name (name base)
-            :tag        (or (str variant-str-combo "-$(echo $CIRCLE_SHA1 | cut -c -7)") "base")
+            :tag        (str (or variant-str-combo "base") "-" "$(echo $CIRCLE_SHA1 | cut -c -7)")
             :file-name  file-name
             :content    (render-file base-template-path
                                      {:from    base-image

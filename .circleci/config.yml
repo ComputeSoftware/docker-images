@@ -10,9 +10,9 @@ jobs:
         name: Build & push zulu-openjdk-8
         command: |-
           echo zulu-openjdk-8
-          docker build -t computesoftware/zulu-openjdk-8:-$(echo $CIRCLE_SHA1 | cut -c -7) . --file dockerfiles/zulu-openjdk-8.Dockerfile
+          docker build -t computesoftware/zulu-openjdk-8:base-$(echo $CIRCLE_SHA1 | cut -c -7) . --file dockerfiles/zulu-openjdk-8.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/zulu-openjdk-8:-$(echo $CIRCLE_SHA1 | cut -c -7)
+          docker push computesoftware/zulu-openjdk-8:base-$(echo $CIRCLE_SHA1 | cut -c -7)
   zulu-openjdk-8-tools-deps-1_10_1_561:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
@@ -62,9 +62,9 @@ jobs:
         name: Build & push zulu-openjdk-11
         command: |-
           echo zulu-openjdk-11
-          docker build -t computesoftware/zulu-openjdk-11:-$(echo $CIRCLE_SHA1 | cut -c -7) . --file dockerfiles/zulu-openjdk-11.Dockerfile
+          docker build -t computesoftware/zulu-openjdk-11:base-$(echo $CIRCLE_SHA1 | cut -c -7) . --file dockerfiles/zulu-openjdk-11.Dockerfile
           docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker push computesoftware/zulu-openjdk-11:-$(echo $CIRCLE_SHA1 | cut -c -7)
+          docker push computesoftware/zulu-openjdk-11:base-$(echo $CIRCLE_SHA1 | cut -c -7)
   zulu-openjdk-11-tools-deps-1_10_1_561:
     docker:
     - {image: 'docker:17.05.0-ce-git'}
