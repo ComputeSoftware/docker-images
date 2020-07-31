@@ -16,11 +16,13 @@
               :zulu-openjdk-11 {:image         "azul/zulu-openjdk:11.0.7-11.39.15"
                                 :template-path debian-path}}
    :variants {:tools-deps {:template-path "variant-scripts/tools-deps.txt"}
-              :intel-mkl  {:template-path "variant-scripts/intel-mkl.txt"}}
+              :intel-mkl  {:template-path "variant-scripts/intel-mkl.txt"}
+              :dev-utils  {:template-path "variant-scripts/dev-utils.txt"}}
    :combos   [{:base :zulu-openjdk-8}
 
               {:base     :zulu-openjdk-8
-               :variants [[:tools-deps {:version tdeps-version}]]}
+               :variants [[:tools-deps {:version tdeps-version}]
+                          [:dev-utils]]}
 
               {:base     :zulu-openjdk-8
                :name     ""
@@ -28,19 +30,22 @@
 
               {:base     :zulu-openjdk-8
                :variants [[:tools-deps {:version tdeps-version}]
-                          [:intel-mkl {:version "2018.4-057"}]]}
+                          [:intel-mkl {:version "2018.4-057"}]
+                          [:dev-utils]]}
 
               {:base :zulu-openjdk-11}
 
               {:base     :zulu-openjdk-11
-               :variants [[:tools-deps {:version tdeps-version}]]}
+               :variants [[:tools-deps {:version tdeps-version}]
+                          [:dev-utils]]}
 
               {:base     :zulu-openjdk-11
                :variants [[:intel-mkl {:version "2018.4-057"}]]}
 
               {:base     :zulu-openjdk-11
                :variants [[:tools-deps {:version tdeps-version}]
-                          [:intel-mkl {:version "2018.4-057"}]]}]})
+                          [:intel-mkl {:version "2018.4-057"}]
+                          [:dev-utils]]}]})
 
 (defn render-file
   [path template-vars]
@@ -52,7 +57,9 @@
          (let [variant-str-combo (when-not (empty? variants)
                                    (str/join "-"
                                              (map (fn [[variant-name {:keys [version]}]]
-                                                    (str (name variant-name) "-" version))
+                                                    (str (name variant-name)
+                                                         (when version
+                                                           (str "-" version))))
                                                   (sort-by first variants))))
                file-name (str (name base) (when variant-str-combo
                                             (str "-" variant-str-combo)))
