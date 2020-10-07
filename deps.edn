@@ -1,2 +1,2 @@
-{:deps {cljstache            {:mvn/version "2.0.4"}
-        clj-commons/clj-yaml {:mvn/version "0.7.0"}}}
+{:deps {cljstache/cljstache  {:mvn/version "2.0.6"}
+        clj-commons/clj-yaml {:mvn/version "0.7.2"}}}
