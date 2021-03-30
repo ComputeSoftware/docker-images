@@ -13,7 +13,7 @@
 (def all-images
   {:bases    {:zulu-openjdk-8  {:image         "azul/zulu-openjdk:8u252-8.46.0.19"
                                 :template-path debian-path}
-              :zulu-openjdk-11 {:image         "azul/zulu-openjdk:11.0.7-11.39.15"
+              :zulu-openjdk-11 {:image         "azul/zulu-openjdk:11.0.10-11.45.27"
                                 :template-path debian-path}}
    :variants {:tools-deps {:template-path "variant-scripts/tools-deps.txt"}
               :intel-mkl  {:template-path "variant-scripts/intel-mkl.txt"}
