@@ -8,7 +8,7 @@
 (def debian-path "base-templates/debian.txt")
 (def alpine-path "base-templates/alpine.txt")
 
-(def tdeps-version "1.10.1.716")
+(def tdeps-version "1.10.3.814")
 
 (def all-images
   {:bases    {:zulu-openjdk-8  {:image         "azul/zulu-openjdk:8u252-8.46.0.19"
