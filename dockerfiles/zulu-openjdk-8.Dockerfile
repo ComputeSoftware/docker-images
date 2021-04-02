@@ -1,7 +1,6 @@
 FROM azul/zulu-openjdk:8u252-8.46.0.19
 
-RUN apt-get update
-RUN apt-get install -y wget gnupg curl
+RUN apt-get update && apt-get install -y wget gnupg curl
 
 
 

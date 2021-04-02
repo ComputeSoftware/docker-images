@@ -1,4 +1,4 @@
-RUN apt-get update && apt-get install ssh git curl -y
+RUN apk update && apk add openssh git curl bash
 
 # https://clojure.org/guides/getting_started
 RUN curl -O https://download.clojure.org/install/linux-install-{{version}}.sh && \

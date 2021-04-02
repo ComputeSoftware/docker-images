@@ -1,4 +1,9 @@
 FROM {{from}}
 
-RUN apk update
-RUN apk add ca-certificates wget gnupg && update-ca-certificates
+RUN apk update && apk add ca-certificates wget gnupg && update-ca-certificates
+
+{{{content}}}
+
+RUN addgroup --gid 3434 circleci \
+  && adduser --uid 3434 --ingroup circleci --shell /bin/bash --home circleci --disabled-password circleci
+USER circleci
