@@ -1,13 +1,13 @@
-FROM azul/zulu-openjdk:11.0.11-11.48.21
+FROM azul/zulu-openjdk:8u252-8.46.0.19
 
 RUN apt-get update && apt-get install -y wget gnupg curl
 
 RUN apt-get update && apt-get install ssh git curl -y
 
 # https://clojure.org/guides/getting_started
-RUN curl -O https://download.clojure.org/install/linux-install-1.10.3.822.sh && \
-  chmod +x linux-install-1.10.3.822.sh && \
-  ./linux-install-1.10.3.822.sh
+RUN curl -O https://download.clojure.org/install/linux-install-1.10.3.855.sh && \
+  chmod +x linux-install-1.10.3.855.sh && \
+  ./linux-install-1.10.3.855.sh
 
 
 RUN apt install \
