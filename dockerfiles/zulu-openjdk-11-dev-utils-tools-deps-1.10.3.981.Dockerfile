@@ -5,9 +5,9 @@ RUN apt-get update && apt-get install -y wget gnupg curl
 RUN apt-get update && apt-get install ssh git curl -y
 
 # https://clojure.org/guides/getting_started
-RUN curl -O https://download.clojure.org/install/linux-install-1.10.3.933.sh && \
-  chmod +x linux-install-1.10.3.933.sh && \
-  ./linux-install-1.10.3.933.sh
+RUN curl -O https://download.clojure.org/install/linux-install-1.10.3.981.sh && \
+  chmod +x linux-install-1.10.3.981.sh && \
+  ./linux-install-1.10.3.981.sh
 
 
 RUN apt install \
