@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk:11.0.12-11.50.19
+FROM azul/zulu-openjdk:11.0.13-11.52.13
 
 RUN apt-get update && apt-get install -y wget gnupg curl
 
