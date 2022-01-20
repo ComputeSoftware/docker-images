@@ -41,9 +41,10 @@
 
               {:base :zulu-openjdk-11}
 
-              {:base     :zulu-openjdk-11
-               :variants [[:tools-deps {:version tdeps-version}]
-                          [:dev-utils]]}
+              {:base         :zulu-openjdk-11
+               :useradd-path "variant-scripts/useradd-dev.txt"
+               :variants     [[:tools-deps {:version tdeps-version}]
+                              [:dev-utils]]}
 
               {:base     :zulu-openjdk-11
                :variants [[:intel-mkl {:version "2018.4-057"}]]}
@@ -64,7 +65,8 @@
 
 (defn dockerfiles-content
   [images-spec]
-  (map (fn [{:keys [base variants]}]
+  (map (fn [{:keys [base variants useradd-path]
+             :or   {useradd-path "variant-scripts/useradd.txt"}}]
          (let [variant-str-combo (when-not (empty? variants)
                                    (str/join "-"
                                      (map (fn [[variant-name {n     :name
@@ -83,11 +85,13 @@
             :content    (render-file base-template-path
                           {:from    base-image
                            :content (str/join "\n\n"
-                                      (map (fn [[variant template-vars]]
-                                             (render-file
-                                               (get-in images-spec [:variants variant :template-path])
-                                               template-vars))
-                                        variants))})
+                                      (concat
+                                        (map (fn [[variant template-vars]]
+                                               (render-file
+                                                 (get-in images-spec [:variants variant :template-path])
+                                                 template-vars))
+                                          variants)
+                                        [(render-file useradd-path {})]))})
             :file       (io/file "dockerfiles" (str file-name ".Dockerfile"))}))
     (:combos images-spec)))
 

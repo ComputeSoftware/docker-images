@@ -8,6 +8,7 @@ RUN apt install \
       gnupg-agent \
       software-properties-common \
       vim \
+      sudo \
       -y
 
 # AWS CLI

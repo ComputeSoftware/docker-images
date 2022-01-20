@@ -20,6 +20,7 @@ RUN apt install \
       gnupg-agent \
       software-properties-common \
       vim \
+      sudo \
       -y
 
 # AWS CLI
@@ -37,6 +38,10 @@ RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
   apt install docker-ce docker-ce-cli containerd.io -y
 
 
-RUN groupadd --gid 3434 circleci \
-  && useradd --uid 3434 --gid circleci --shell /bin/bash --create-home circleci
+# Configure user as root
+RUN useradd --uid 3434 --user-group --shell /bin/bash --create-home circleci \
+    && echo 'circleci ALL=NOPASSWD: ALL' >> /etc/sudoers.d/50-circleci \
+    && usermod -G root circleci
+
 USER circleci
+

@@ -1,0 +1,6 @@
+# Configure user as root
+RUN useradd --uid 3434 --user-group --shell /bin/bash --create-home circleci \
+    && echo 'circleci ALL=NOPASSWD: ALL' >> /etc/sudoers.d/50-circleci \
+    && usermod -G root circleci
+
+USER circleci
