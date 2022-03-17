@@ -16,6 +16,7 @@ RUN apt install \
       unzip \
       apt-transport-https \
       ca-certificates \
+      jq \
       curl \
       gnupg-agent \
       software-properties-common \

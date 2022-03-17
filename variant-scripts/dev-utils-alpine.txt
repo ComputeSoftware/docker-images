@@ -5,6 +5,7 @@ RUN apk add \
       ca-certificates \
       curl \
       gnupg \
+      jq \
       vim
 
 # AWS CLI
