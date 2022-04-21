@@ -11,9 +11,7 @@
 (def tdeps-version "1.11.1.1105")
 
 (def all-images
-  {:bases    {:zulu-openjdk-8             {:image         "azul/zulu-openjdk:8u252-8.46.0.19"
-                                           :template-path debian-path}
-              :zulu-openjdk-11            {:image         "azul/zulu-openjdk:11.0.14.1-11.54.25"
+  {:bases    {:zulu-openjdk-11            {:image         "azul/zulu-openjdk:11.0.14.1-11.54.25"
                                            :template-path debian-path}
               :zulu-openjdk-alpine-11-jre {:image         "azul/zulu-openjdk-alpine:11.0.14.1-11.54.25-jre"
                                            :template-path alpine-path}}
@@ -24,22 +22,7 @@
               :dev-utils         {:template-path "variant-scripts/dev-utils.txt"}
               :dev-utils-alpine  {:template-path "variant-scripts/dev-utils-alpine.txt"
                                   :name          "dev-utils"}}
-   :combos   [{:base :zulu-openjdk-8}
-
-              {:base     :zulu-openjdk-8
-               :variants [[:tools-deps {:version tdeps-version}]
-                          [:dev-utils]]}
-
-              {:base     :zulu-openjdk-8
-               :name     ""
-               :variants [[:intel-mkl {:version "2018.4-057"}]]}
-
-              {:base     :zulu-openjdk-8
-               :variants [[:tools-deps {:version tdeps-version}]
-                          [:intel-mkl {:version "2018.4-057"}]
-                          [:dev-utils]]}
-
-              {:base :zulu-openjdk-11}
+   :combos   [{:base :zulu-openjdk-11}
 
               {:base         :zulu-openjdk-11
                :useradd-path "variant-scripts/useradd-dev.txt"
